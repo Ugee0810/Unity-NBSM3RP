@@ -1,3 +1,6 @@
 [submodule "Resources_NBSM3RP"]
 	path = Resources_NBSM3RP
 	url = https://github.com/Ugee0810/Unity-NBSM3RP-Resources
+[submodule "LibModules_NBSM3RP"]
+	path = LibModules_NBSM3RP
+	url = https://github.com/Ugee0810/Unity-LibModules.git
