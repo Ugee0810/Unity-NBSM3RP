@@ -1,5 +1,17 @@
 {
   "dependencies": {
+    "com.ugee0810.resourcesofnbsm3rp": {
+      "version": "file:../../01.Resources_NBSM3RP",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.ugee0810.unitylibmodules": {
+      "version": "file:../../02.LibModules",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.burst": {
       "version": "1.8.10",
       "depth": 1,
