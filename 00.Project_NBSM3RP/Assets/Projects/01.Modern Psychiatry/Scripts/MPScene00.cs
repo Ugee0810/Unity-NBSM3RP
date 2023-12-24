@@ -19,6 +19,6 @@ public class MPScene00 : MonoBehaviour
 
     private void OnClickMain(Unit _)
     {
-        MPModel.SceneLevel.OnNext(MPModel.NextSceneLevel());
+        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.NextSceneLevel());
     }
 }

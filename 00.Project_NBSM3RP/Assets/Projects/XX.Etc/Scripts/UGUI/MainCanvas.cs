@@ -9,9 +9,14 @@ public class MainCanvas : MonoBehaviour
 {
     [ReadOnly(true), SerializeField] private List<CanvasGroup> canvasGroups;
 
+    private void Awake()
+    {
+        SceneLevelModel.Initialization();
+    }
+
     private void Start()
     {
-        MPModel.SceneLevel
+        SceneLevelModel.GetSceneLevel()
             .AsObservable()
             .Subscribe(SceneLevelChangedHandler)
             .AddTo(gameObject);
@@ -28,7 +33,7 @@ public class MainCanvas : MonoBehaviour
             .Subscribe(PreviousSceneHandler)
             .AddTo(gameObject);
 
-        MPModel.SceneLevel.OnNext(MPModel.CurrentSceneLevel);
+        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.GetCurrentSceneLevel());
     }
 
     private void SceneLevelChangedHandler(int changedSceneLevel)
@@ -37,15 +42,15 @@ public class MainCanvas : MonoBehaviour
 
         switch (true)
         {
-            case var _ when MPModel.CurrentSceneLevel > changedSceneLevel:
+            case var _ when SceneLevelModel.GetCurrentSceneLevel() > changedSceneLevel:
                 OnChangeSceneState(changedSceneLevel + 1, false);
                 break;
-            case var _ when MPModel.CurrentSceneLevel < changedSceneLevel:
+            case var _ when SceneLevelModel.GetCurrentSceneLevel() < changedSceneLevel:
                 OnChangeSceneState(changedSceneLevel - 1, false);
                 break;
         }
 
-        MPModel.CurrentSceneLevel = changedSceneLevel;
+        SceneLevelModel.SetCurrentSceneLevel(changedSceneLevel);
         
         OnChangeSceneState(changedSceneLevel, true);
     }
@@ -54,18 +59,18 @@ public class MainCanvas : MonoBehaviour
     {
         Debug.Log("MainCanvas.NextSceneHandler(): Shift+2 Pressed");
 
-        if (MPModel.CurrentSceneLevel == canvasGroups.Count - 1) return;
+        if (SceneLevelModel.GetCurrentSceneLevel() == canvasGroups.Count - 1) return;
 
-        MPModel.SceneLevel.OnNext(MPModel.NextSceneLevel());
+        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.NextSceneLevel());
     }
 
     private void PreviousSceneHandler(long _)
     {
         Debug.Log("MainCanvas.PreviousSceneHandler(): Shift+1 Pressed");
 
-        if (MPModel.CurrentSceneLevel == 0) return;
+        if (SceneLevelModel.GetCurrentSceneLevel() == 0) return;
 
-        MPModel.SceneLevel.OnNext(MPModel.PrevSceneLevel());
+        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.PrevSceneLevel());
     }
 
     private void OnChangeSceneState(int changedSceneLevel, bool IsEnabled)
