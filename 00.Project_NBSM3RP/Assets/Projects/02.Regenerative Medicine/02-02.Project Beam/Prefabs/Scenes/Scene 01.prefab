@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2896542367999753708}
   - component: {fileID: 3734323369378376569}
-  - component: {fileID: 620808439569190942}
   m_Layer: 5
   m_Name: Scene 01
   m_TagString: Untagged
@@ -133,18 +132,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &620808439569190942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610483267026552765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b55dcd3a2f9470046912d23f67370a07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4217437432963613872
 GameObject:
   m_ObjectHideFlags: 0
