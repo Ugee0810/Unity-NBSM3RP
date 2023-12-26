@@ -6,16 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Projects/01.Modern Psychiatry/Modern Psychiatry.unity
+    path: Assets/Projects/01.Medical Science Encyclopedia/Medical Science Encyclopedia.unity
+    guid: 86b0209a57f9c4690a52dde384196f07
+  - enabled: 1
+    path: Assets/Projects/02.Modern Psychiatry/Modern Psychiatry.unity
     guid: e2386712f2bd6f240b92e92f4507cac3
   - enabled: 1
-    path: Assets/Projects/02.Regenerative Medicine Project Beam/Regenerative Medicine
+    path: Assets/Projects/03.Regenerative Medicine Project Beam/Regenerative Medicine
       Project Beam.unity
     guid: ac362b757ea8e41819d7150ba83773dc
   - enabled: 1
-    path: Assets/Projects/03.Autoimmune Therapy/Autoimmune Therapy.unity
+    path: Assets/Projects/04.Autoimmune Therapy/Autoimmune Therapy.unity
     guid: 852363bff0ffa4d3d824c10ec0fb062f
   - enabled: 1
-    path: Assets/Projects/04.Gene Editing/Gene Editing.unity
+    path: Assets/Projects/05.Gene Editing/Gene Editing.unity
     guid: 7073a24eff7564f52a21d787a1611853
   m_configObjects: {}
