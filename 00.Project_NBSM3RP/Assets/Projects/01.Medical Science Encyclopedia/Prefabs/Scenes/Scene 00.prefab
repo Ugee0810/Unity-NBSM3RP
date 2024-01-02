@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6029694179501303367}
   - component: {fileID: 4999120950782343059}
-  - component: {fileID: 2007087526850434069}
+  - component: {fileID: 749554194067953902}
   m_Layer: 5
   m_Name: Scene 00
   m_TagString: Untagged
@@ -248,7 +248,7 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &2007087526850434069
+--- !u!114 &749554194067953902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -257,10 +257,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6167998511451366503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5df1d8aa417d5444abe3b16acbdd3ca5, type: 3}
+  m_Script: {fileID: 11500000, guid: c88218b54e4fa4eb5b359094fa5c4688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainButton: {fileID: 6158133104017255112}
+  buttons:
+  - {fileID: 6158133104017255112}
+  levels: 01000000
 --- !u!1 &6763152628786535420
 GameObject:
   m_ObjectHideFlags: 0
