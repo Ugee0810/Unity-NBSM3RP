@@ -11,12 +11,12 @@ public class MainCanvas : MonoBehaviour
 
     private void Awake()
     {
-        SceneLevelModel.Initialization();
+        SceneLevelModel.InitializationSceneLevelHandler();
     }
 
     private void Start()
     {
-        SceneLevelModel.GetSceneLevel()
+        SceneLevelModel.SceneLevel
             .AsObservable()
             .Subscribe(SceneLevelChangedHandler)
             .AddTo(gameObject);
@@ -24,61 +24,50 @@ public class MainCanvas : MonoBehaviour
         Observable.EveryUpdate()
             .Where(_ => Input.GetKey(KeyCode.LeftShift))
             .Where(_ => Input.GetKeyDown(KeyCode.Alpha2))
-            .Subscribe(NextSceneHandler)
+            .Subscribe(delegate { NextSceneHandler(); })
             .AddTo(gameObject);
 
         Observable.EveryUpdate()
             .Where(_ => Input.GetKey(KeyCode.LeftShift))
             .Where(_ => Input.GetKeyDown(KeyCode.Alpha1))
-            .Subscribe(PreviousSceneHandler)
+            .Subscribe(delegate { PreviousSceneHandler(); })
             .AddTo(gameObject);
 
-        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.GetCurrentSceneLevel());
+        SceneLevelModel.SceneLevel
+            .OnNext(SceneLevelModel.CurrentSceneLevel);
     }
 
     private void SceneLevelChangedHandler(int changedSceneLevel)
     {
-        Debug.Log($"MainCanvas.SceneLevelChangedHandler(): changedSceneLevel is {changedSceneLevel}");
+        SceneLevelModel.CurrentSceneLevel = changedSceneLevel;
 
-        switch (true)
+        for (int i = 0; i < canvasGroups.Count; i++)
         {
-            case var _ when SceneLevelModel.GetCurrentSceneLevel() > changedSceneLevel:
-                OnChangeSceneState(changedSceneLevel + 1, false);
-                break;
-            case var _ when SceneLevelModel.GetCurrentSceneLevel() < changedSceneLevel:
-                OnChangeSceneState(changedSceneLevel - 1, false);
-                break;
+            canvasGroups[i].alpha = (i == changedSceneLevel) ? 1 : 0;
+            canvasGroups[i].interactable = (i == changedSceneLevel);
+            canvasGroups[i].blocksRaycasts = (i == changedSceneLevel);
         }
 
-        SceneLevelModel.SetCurrentSceneLevel(changedSceneLevel);
-        
-        OnChangeSceneState(changedSceneLevel, true);
+        Debug.Log($"MainCanvas.SceneLevelChangedHandler(): SceneLevelModel.CurrentSceneLevel Value is [{changedSceneLevel}]");
     }
 
-    private void NextSceneHandler(long _)
+    private void NextSceneHandler()
     {
+        if (SceneLevelModel.CurrentSceneLevel == canvasGroups.Count - 1) return;
+
+        SceneLevelModel.SceneLevel
+            .OnNext(SceneLevelModel.NextSceneLevel());
+
         Debug.Log("MainCanvas.NextSceneHandler(): Shift+2 Pressed");
-
-        if (SceneLevelModel.GetCurrentSceneLevel() == canvasGroups.Count - 1) return;
-
-        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.NextSceneLevel());
     }
 
-    private void PreviousSceneHandler(long _)
+    private void PreviousSceneHandler()
     {
+        if (SceneLevelModel.CurrentSceneLevel == 0) return;
+
+        SceneLevelModel.SceneLevel
+            .OnNext(SceneLevelModel.PrevSceneLevel());
+
         Debug.Log("MainCanvas.PreviousSceneHandler(): Shift+1 Pressed");
-
-        if (SceneLevelModel.GetCurrentSceneLevel() == 0) return;
-
-        SceneLevelModel.GetSceneLevel().OnNext(SceneLevelModel.PrevSceneLevel());
-    }
-
-    private void OnChangeSceneState(int changedSceneLevel, bool IsEnabled)
-    {
-        canvasGroups[changedSceneLevel].alpha = IsEnabled
-            ? 1
-            : 0;
-        canvasGroups[changedSceneLevel].interactable = IsEnabled;
-        canvasGroups[changedSceneLevel].blocksRaycasts = IsEnabled;
     }
 }
