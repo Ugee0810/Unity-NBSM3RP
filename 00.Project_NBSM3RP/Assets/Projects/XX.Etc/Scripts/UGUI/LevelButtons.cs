@@ -26,7 +26,7 @@ public class LevelButtons : MonoBehaviour
 
     private void OnClickHandler(int level)
     {
-        SceneLevelModel.SetCurrentSceneLevel(level);
-        SceneLevelModel.GetSceneLevel().OnNext(level);
+        SceneLevelModel.CurrentSceneLevel = level;
+        SceneLevelModel.SceneLevel.OnNext(level);
     }
 }
