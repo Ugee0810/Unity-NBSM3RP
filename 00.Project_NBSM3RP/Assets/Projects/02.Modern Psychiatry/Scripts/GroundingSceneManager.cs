@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using TMPro;
+using DG.Tweening;
 
 public class GroundingSceneManager : MonoBehaviour
 {
@@ -42,17 +43,19 @@ public class GroundingSceneManager : MonoBehaviour
     [SerializeField] private float maxX = 2600.0f;
     [SerializeField] private float timeRemaining;
     [SerializeField] private float maxTime;
+    [ReadOnly(false), SerializeField] private float rotationState = 0f;
+    [ReadOnly(false), SerializeField] private bool isTouching = false;
     private CompositeDisposable clearDisposables = new();
 
     private void Start()
     {
         Observable
             .EveryUpdate()
-            .Select(_ => canvasGroup.alpha == 1)
+            .Where(_ => canvasGroup.alpha == 1)
             .Subscribe(delegate
                 {
-                    MouseMovementRestriction();
-                    DetectionRelatedHandler();
+                    TouchMovementRestriction();
+                    OnUpdateRotateCursorCircle();
                     PlaySFX();
                     TimerUpdate();
                 })
@@ -82,7 +85,7 @@ public class GroundingSceneManager : MonoBehaviour
     }
 #endif
 
-    private void MouseMovementRestriction()
+    private void TouchMovementRestriction()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
@@ -94,14 +97,53 @@ public class GroundingSceneManager : MonoBehaviour
             min: minX,
             max: maxX
         );
+
         backGround.position = newPosition;
     }
 
-    private void DetectionRelatedHandler()
+    private void OnUpdateRotateCursorCircle()
     {
-        Vector3 mousePosition = Input.mousePosition;
+        if (!isTouching)
+        {
+            rotationState += 360f / 4f * Time.deltaTime;
 
-        cursorCircle.position = mousePosition;
+            Vector2 centerPoint = new(1081 / 2, 1921 / 2);
+            float radius = Mathf.Min(1081, 1921) / 4;
+            float radian = rotationState * Mathf.Deg2Rad;
+            Vector2 newPosition = centerPoint + new Vector2(Mathf.Cos(radian) * radius, Mathf.Sin(radian) * radius);
+
+            cursorCircle.position = newPosition;
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            isTouching = true;
+            cursorCircle.DOKill();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            cursorCircle
+                .DOMove(Input.mousePosition, 0.4f)
+                .SetEase(Ease.Linear);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            Vector2 centerPoint = new(1081 / 2, 1921 / 2);
+            float radius = Mathf.Min(1081, 1921) / 4;
+            float radian = rotationState * Mathf.Deg2Rad;
+            Vector2 newPosition = centerPoint + new Vector2(Mathf.Cos(radian) * radius, Mathf.Sin(radian) * radius);
+
+            cursorCircle
+                .DOMove(newPosition, 0.4f)
+                .SetEase(Ease.Linear)
+                .OnComplete(() =>
+                    {
+                        isTouching = false;
+                    }
+            );
+        }
     }
 
     private void PlaySFX()
@@ -232,6 +274,8 @@ public class GroundingSceneManager : MonoBehaviour
                 }
                 break;
         }
+
+        cursorCircle.position = Vector2.zero;
 
         SetInitialTime();
 
