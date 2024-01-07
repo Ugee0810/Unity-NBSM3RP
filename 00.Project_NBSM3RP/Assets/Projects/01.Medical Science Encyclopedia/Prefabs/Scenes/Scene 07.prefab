@@ -804,7 +804,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6226127477120654025}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -850,7 +850,7 @@ MonoBehaviour:
   - {fileID: 2224798409980393333}
   - {fileID: 8077102203407795817}
   - {fileID: 4637192907056177725}
-  levels: 08000000090000000a0000000b0000000c00000001000000
+  levels: 08000000090000000a0000000b0000000c00000005000000
 --- !u!1 &6464834772889778983
 GameObject:
   m_ObjectHideFlags: 0
