@@ -5,8 +5,8 @@ using UniRx;
 
 public static partial class SceneLevelModel
 {
-    public static Subject<int> SceneLevel {get; set;}
-    public static int CurrentSceneLevel {get; set;}
+    public static Subject<int> SceneLevel { get; set; }
+    public static int CurrentSceneLevel { get; set; }
 
     public static void InitializationSceneLevelHandler()
     {

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.coffee.unmask": "https://github.com/mob-sakai/UnmaskForUGUI.git",
     "com.ugee0810.resourcesofnbsm3rp": "file:../../01.Resources_NBSM3RP",
     "com.ugee0810.unitylibmodules": "file:../../02.LibModules",
     "com.unity.collab-proxy": "2.2.0",
