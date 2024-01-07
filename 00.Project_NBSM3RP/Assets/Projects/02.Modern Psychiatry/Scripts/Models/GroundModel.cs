@@ -9,8 +9,11 @@ public static class GroundModel
     public enum Difficulty { Easy, Normal, Hard }
 
     public static ReactiveProperty<Difficulty> CurrentDifficulty { get; private set; }
+    public static ReactiveProperty<int> StageLevel { get; private set; }
 
     public static event Action<Difficulty, int> OnGameStart;
+    public static event Action OnGameClear;
+    public static event Action OnGameFail;
 
     public static void InitializationGameDifficulty()
     {
@@ -48,8 +51,6 @@ public static class GroundModel
         Debug.Log($"GroundModel.RaiseMainGameStart({curDifficulty})");
     }
 
-    public static event Action OnGameClear;
-
     public static void RaiseIncreaseDifficulty()
     {
         switch (CurrentDifficulty.Value)
@@ -62,25 +63,19 @@ public static class GroundModel
                 break;
         }
 
-        OnGameClear?.Invoke();
-
         Debug.Log($"GroundModel.RaiseOnIncDifficulty()");
     }
 
-    public static event Action OnGameFail;
-
-    public static void RaiseGameFail()
-    {
-        OnGameFail?.Invoke();
-
-        Debug.Log($"GroundModel.RaiseOnGameFail()");
-    }
-
-    public static ReactiveProperty<int> StageLevel { get; private set; }
-
     public static void InitializationStageLevel()
     {
-        StageLevel = new(0);
+        if (StageLevel != null)
+        {
+            StageLevel.Value = 0;
+        }
+        else
+        {
+            StageLevel = new(0);
+        }
 
         Debug.Log($"GroundModel.InitializationStageLevel()");
     }
@@ -90,5 +85,19 @@ public static class GroundModel
         StageLevel.Value++;
 
         Debug.Log($"GroundModel.RaiseNextLevel()");
+    }
+    
+    public static void RaiseGameClear()
+    {
+        OnGameClear?.Invoke();
+
+        Debug.Log($"GroundModel.RaiseGameClear()");
+    }
+
+    public static void RaiseGameFail()
+    {
+        OnGameFail?.Invoke();
+
+        Debug.Log($"GroundModel.RaiseOnGameFail()");
     }
 }

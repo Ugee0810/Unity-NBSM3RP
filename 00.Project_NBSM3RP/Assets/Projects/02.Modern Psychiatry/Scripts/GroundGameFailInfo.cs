@@ -11,7 +11,7 @@ public class GroundGameFailInfo : MonoBehaviour
 
     private void Start()
     {
-        // GroundModel.OnGameFail += OnGameFail;
+        GroundModel.OnGameFail += OnGameFail;
 
         nextButton
             .OnClickAsObservable()
@@ -24,10 +24,10 @@ public class GroundGameFailInfo : MonoBehaviour
             .AddTo(gameObject);
     }
 
-    // private void OnGameFail()
-    // {
-    //     SceneLevelModel.CurrentSceneLevel = 14;
-    // }
+    private void OnGameFail()
+    {
+        
+    }
 
     private void OnClickNext()
     {

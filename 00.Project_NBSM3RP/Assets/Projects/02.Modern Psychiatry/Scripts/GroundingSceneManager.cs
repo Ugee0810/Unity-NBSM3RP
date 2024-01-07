@@ -1,11 +1,3 @@
-/* 
-게임 클리어 or 실패 로직
-    물건 찾고 이미지 변경 로직
-    시간 슬라이더 + 텍스트
-    초기 제한 시간 10/8/5초, 물체 찾을 때 마다 2/1.5/1초씩 추가
-글꼴 변경
-*/
-
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,11 +40,12 @@ public class GroundingSceneManager : MonoBehaviour
     [SerializeField] private float moveSpeed = 3.0f;
     [SerializeField] private float minX = -1550.0f;
     [SerializeField] private float maxX = 2600.0f;
+    [SerializeField] private float timeRemaining;
+    [SerializeField] private float maxTime;
     private CompositeDisposable clearDisposables = new();
 
     private void Start()
     {
-
         Observable
             .EveryUpdate()
             .Select(_ => canvasGroup.alpha == 1)
@@ -61,6 +54,7 @@ public class GroundingSceneManager : MonoBehaviour
                     MouseMovementRestriction();
                     DetectionRelatedHandler();
                     PlaySFX();
+                    TimerUpdate();
                 })
             .AddTo(gameObject);
 
@@ -239,6 +233,8 @@ public class GroundingSceneManager : MonoBehaviour
                 break;
         }
 
+        SetInitialTime();
+
         GroundModel.InitializationStageLevel();
 
         GroundModel.StageLevel
@@ -288,6 +284,7 @@ public class GroundingSceneManager : MonoBehaviour
             .OnClickAsObservable()
             .Subscribe(delegate
                 {
+                    FoundTarget();
                     targetButtons[level].gameObject.SetActive(false);
                     GroundModel.RaiseNextLevel();
                 })
@@ -310,6 +307,7 @@ public class GroundingSceneManager : MonoBehaviour
     {
         SceneLevelModel.CurrentSceneLevel = 13;
         SceneLevelModel.SceneLevel.OnNext(13);
+        GroundModel.RaiseGameClear();
         Debug.Log($"GroundingSceneManager.OnGameClear()");
     }
 
@@ -317,6 +315,77 @@ public class GroundingSceneManager : MonoBehaviour
     {
         SceneLevelModel.CurrentSceneLevel = 14;
         SceneLevelModel.SceneLevel.OnNext(14);
+        GroundModel.RaiseGameFail();
         Debug.Log($"GroundingSceneManager.OnGameFail()");
+    }
+
+    private void TimerUpdate()
+    {
+        if (isSFXPlay && timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            StartCoroutine(UpdateTimeUI(Time.deltaTime));
+        }
+        else if (isSFXPlay && timeRemaining <= 0)
+        {
+            OnGameFail();
+        }
+    }
+
+    private void SetInitialTime()
+    {
+        switch (GroundModel.CurrentDifficulty.Value)
+        {
+            case GroundModel.Difficulty.Easy:
+                maxTime = timeRemaining = 10f;
+                break;
+            case GroundModel.Difficulty.Normal:
+                maxTime = timeRemaining = 8f;
+                break;
+            case GroundModel.Difficulty.Hard:
+                maxTime = timeRemaining = 5f;
+                break;
+        }
+        sliderImage.fillAmount = 1;
+    }
+
+    private void FoundTarget()
+    {
+        float addedTime = 0;
+
+        switch (GroundModel.CurrentDifficulty.Value)
+        {
+            case GroundModel.Difficulty.Easy:
+                addedTime = 2f;
+                break;
+            case GroundModel.Difficulty.Normal:
+                addedTime = 1.5f;
+                break;
+            case GroundModel.Difficulty.Hard:
+                addedTime = 1f;
+                break;
+        }
+
+        timeRemaining = Mathf.Min(timeRemaining + addedTime, maxTime);
+
+        StartCoroutine(UpdateTimeUI(0.5f));
+    }
+
+    private IEnumerator UpdateTimeUI(float animationDuration)
+    {
+        float targetFillAmount = timeRemaining / maxTime;
+        float startFillAmount = sliderImage.fillAmount;
+        float elapsedTime = 0;
+
+        while (elapsedTime < animationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newFillAmount = Mathf.Lerp(startFillAmount, targetFillAmount, elapsedTime / animationDuration);
+            sliderImage.fillAmount = newFillAmount;
+            sliderText.text = "제한 시간 : " + timeRemaining.ToString("F0") + "초";
+            yield return null;
+        }
+
+        sliderImage.fillAmount = targetFillAmount;
     }
 }
