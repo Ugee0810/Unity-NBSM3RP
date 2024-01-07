@@ -8,6 +8,7 @@ public class GroundGameClearInfo : MonoBehaviour
 {
     [ReadOnly(false), SerializeField] private List<Sprite> nextButtonSprites;
     [ReadOnly(false), SerializeField] private Button nextButton;
+    [ReadOnly(false), SerializeField] private Button mainButton;
 
     private void Start()
     {
@@ -17,12 +18,15 @@ public class GroundGameClearInfo : MonoBehaviour
             .OnClickAsObservable()
             .Subscribe(delegate { OnClickNext(); })
             .AddTo(gameObject);
+
+        mainButton
+            .OnClickAsObservable()
+            .Subscribe(delegate { OnClickMain(); })
+            .AddTo(gameObject);
     }
 
     private void OnGameClear()
     {
-        SceneLevelModel.CurrentSceneLevel = 13;
-
         switch (GroundModel.CurrentDifficulty.Value)
         {
             case GroundModel.Difficulty.Easy:
@@ -37,6 +41,8 @@ public class GroundGameClearInfo : MonoBehaviour
         }
 
         nextButton.image.SetNativeSize();
+
+        Debug.Log($"GroundGameClearInfo.OnGameClear()");
     }
 
     private void OnClickNext()
@@ -44,15 +50,27 @@ public class GroundGameClearInfo : MonoBehaviour
         switch (GroundModel.CurrentDifficulty.Value)
         {
             case GroundModel.Difficulty.Easy:
-                GroundModel.RaiseMainGameStart(GroundModel.Difficulty.Normal);
+                GroundModel.RaiseIncreaseDifficulty();
+                GroundModel.RaiseGameStart(GroundModel.Difficulty.Normal);
+                SceneLevelModel.CurrentSceneLevel = 12;
+                SceneLevelModel.SceneLevel.OnNext(12);
                 break;
             case GroundModel.Difficulty.Normal:
-                GroundModel.RaiseMainGameStart(GroundModel.Difficulty.Hard);
+                GroundModel.RaiseIncreaseDifficulty();
+                GroundModel.RaiseGameStart(GroundModel.Difficulty.Hard);
+                SceneLevelModel.CurrentSceneLevel = 12;
+                SceneLevelModel.SceneLevel.OnNext(12);
                 break;
             case GroundModel.Difficulty.Hard:
+                GroundModel.InitializationGameDifficulty();
                 SceneLevelModel.CurrentSceneLevel = 0;
-                GroundModel.InitializationModel();
+                SceneLevelModel.SceneLevel.OnNext(0);
                 break;
         }
+    }
+
+    private void OnClickMain()
+    {
+        GroundModel.InitializationGameDifficulty();
     }
 }

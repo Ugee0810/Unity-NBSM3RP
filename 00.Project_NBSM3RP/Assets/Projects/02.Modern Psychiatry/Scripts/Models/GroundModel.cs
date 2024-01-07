@@ -11,15 +11,22 @@ public static class GroundModel
     public static ReactiveProperty<Difficulty> CurrentDifficulty { get; private set; }
 
     public static event Action<Difficulty, int> OnGameStart;
-    public static event Action OnGameClear;
-    public static event Action OnGameFail;
 
-    public static void InitializationModel()
+    public static void InitializationGameDifficulty()
     {
-        CurrentDifficulty = new();
+        if (CurrentDifficulty != null)
+        {
+            CurrentDifficulty.Value = Difficulty.Easy;
+        }
+        else
+        {
+            CurrentDifficulty = new(Difficulty.Easy);
+        }
+
+        Debug.Log($"GroundModel.InitializationGameDifficulty()");
     }
 
-    public static void RaiseMainGameStart(Difficulty curDifficulty)
+    public static void RaiseGameStart(Difficulty curDifficulty)
     {
         int randomStageNumber = 0;
 
@@ -37,9 +44,13 @@ public static class GroundModel
         }
 
         OnGameStart?.Invoke(curDifficulty, randomStageNumber);
+
+        Debug.Log($"GroundModel.RaiseMainGameStart({curDifficulty})");
     }
 
-    public static void RaiseOnGameClear()
+    public static event Action OnGameClear;
+
+    public static void RaiseIncreaseDifficulty()
     {
         switch (CurrentDifficulty.Value)
         {
@@ -52,21 +63,32 @@ public static class GroundModel
         }
 
         OnGameClear?.Invoke();
+
+        Debug.Log($"GroundModel.RaiseOnIncDifficulty()");
     }
 
-    public static void RaiseOnGameFail()
+    public static event Action OnGameFail;
+
+    public static void RaiseGameFail()
     {
         OnGameFail?.Invoke();
+
+        Debug.Log($"GroundModel.RaiseOnGameFail()");
     }
 
+    public static ReactiveProperty<int> StageLevel { get; private set; }
 
-    //////////////
-    /// InGame ///
-    //////////////
-    public static event Action OnNextItem;
-
-    public static void RaiseOnNextItem()
+    public static void InitializationStageLevel()
     {
-        OnNextItem?.Invoke();
+        StageLevel = new(0);
+
+        Debug.Log($"GroundModel.InitializationStageLevel()");
+    }
+
+    public static void RaiseNextLevel()
+    {
+        StageLevel.Value++;
+
+        Debug.Log($"GroundModel.RaiseNextLevel()");
     }
 }

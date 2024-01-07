@@ -16,7 +16,8 @@ using TMPro;
 
 public class GroundingSceneManager : MonoBehaviour
 {
-    [Header("[전체 이미지 및 타겟 포지션]")]
+    [Header("[Resources]")]
+    [SerializeField] private List<Sprite> backGroundSprites;
     [SerializeField] private List<Sprites> easySprites;
     [SerializeField] private List<Sprites> normalSprites;
     [SerializeField] private List<Sprites> hardSprites;
@@ -24,17 +25,20 @@ public class GroundingSceneManager : MonoBehaviour
 
     [Space(10), Header("[UGUI]")]
     [ReadOnly(false), SerializeField] private CanvasGroup canvasGroup;
+    [ReadOnly(false), SerializeField] private Transform backGround;
     [ReadOnly(false), SerializeField] private RectTransform cursorCircle;
+    [ReadOnly(false), SerializeField] private Image questImage;
+    [ReadOnly(false), SerializeField] private Image hintImage;
     [ReadOnly(false), SerializeField] private Image sliderImage;
     [ReadOnly(false), SerializeField] private TMP_Text sliderText;
     [ReadOnly(false), SerializeField] private List<Button> targetButtons;
 
     [Space(10), Header("[Current Game Info]")]
-    [ReadOnly(false), SerializeField] private Transform currentBackGround;
-    [ReadOnly(false), SerializeField] private List<Sprite> currentQuestSprites;
-    [ReadOnly(false), SerializeField] private List<Sprite> currentHintSprites;
-    [ReadOnly(false), SerializeField] private List<Sprite> currentItemSprites;
-    [ReadOnly(false), SerializeField] private List<GameItem> currentTargets;
+    [ReadOnly(false), SerializeField] private Image curStage;
+    [ReadOnly(false), SerializeField] private List<Sprite> curQuestSprites;
+    [ReadOnly(false), SerializeField] private List<Sprite> curHintSprites;
+    [ReadOnly(false), SerializeField] private List<Sprite> curTargetSprites;
+    [ReadOnly(false), SerializeField] private List<GameItem> curTargets;
 
     [Space(10), Header("[SFX]")]
     [ReadOnly(false), SerializeField] private AudioSource sfx;
@@ -44,10 +48,11 @@ public class GroundingSceneManager : MonoBehaviour
     [SerializeField] private float moveSpeed = 3.0f;
     [SerializeField] private float minX = -1550.0f;
     [SerializeField] private float maxX = 2600.0f;
-    private CompositeDisposable clearButtonDisposables = new();
+    private CompositeDisposable clearDisposables = new();
 
     private void Start()
     {
+
         Observable
             .EveryUpdate()
             .Select(_ => canvasGroup.alpha == 1)
@@ -62,19 +67,40 @@ public class GroundingSceneManager : MonoBehaviour
         GroundModel.OnGameStart += OnGameStart;
     }
 
+#if UNITY_EDITOR
+    public Sprite testSprite;
+    private void OnValidate()
+    {
+        foreach (var item in easySprites)
+        {
+            item.target = testSprite;
+        }
+
+        foreach (var item in normalSprites)
+        {
+            item.target = testSprite;
+        }
+
+        foreach (var item in hardSprites)
+        {
+            item.target = testSprite;
+        }
+    }
+#endif
+
     private void MouseMovementRestriction()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         float directionX = mousePosition.x - screenCenter.x;
-        Vector3 newPosition = currentBackGround.position - new Vector3(directionX, 0, 0) * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = backGround.position - new Vector3(directionX, 0, 0) * moveSpeed * Time.deltaTime;
 
         newPosition.x = Mathf.Clamp(
             value: newPosition.x,
             min: minX,
             max: maxX
         );
-        currentBackGround.position = newPosition;
+        backGround.position = newPosition;
     }
 
     private void DetectionRelatedHandler()
@@ -94,6 +120,7 @@ public class GroundingSceneManager : MonoBehaviour
             }
 
             isSFXPlay = false;
+            StopAllCoroutines();
         }
         else
         {
@@ -103,161 +130,193 @@ public class GroundingSceneManager : MonoBehaviour
             }
             else
             {
-                sfx.Play();
-
+                StartCoroutine(PlayWithDelay(0.3f));
                 isSFXPlay = true;
             }
         }
+
+        IEnumerator PlayWithDelay(float delay)
+        {
+            sfx.Play();
+
+            while (sfx.isPlaying)
+            {
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(delay);
+
+            isSFXPlay = false;
+            PlaySFX();
+        }
     }
 
-    private void OnGameStart(GroundModel.Difficulty curDifficulty, int number)
+    private void OnGameStart(GroundModel.Difficulty curDifficulty, int stageNum)
     {
-        Debug.Log($"GroundingSceneManager.OnGameStart(): curDifficulty is [{curDifficulty}], Stage Num is [{number}]");
+        Debug.Log($"GroundingSceneManager.OnGameStart(): curDifficulty is [{curDifficulty}], Stage Num is [{stageNum}]");
 
-        clearButtonDisposables?.Dispose();
-        clearButtonDisposables = new();
+        /// Initialization
+        clearDisposables?.Dispose();
+        clearDisposables = new();
 
-        currentQuestSprites.Clear();
-        currentHintSprites.Clear();
-        currentItemSprites.Clear();
-        currentTargets.Clear();
+        curStage.sprite = null;
+        curQuestSprites.Clear();
+        curHintSprites.Clear();
+        curTargetSprites.Clear();
+        curTargets.Clear();
 
         foreach (var target in targetButtons)
         {
+            var image = target.GetComponent<Image>();
+            image.raycastTarget = false;
             target.image = null;
             target.gameObject.SetActive(false);
         }
 
-        targetButtons.First().gameObject.SetActive(true);
-
+        /// Load Resources
         switch (curDifficulty)
         {
             case GroundModel.Difficulty.Easy:
-                switch (number)
+                switch (stageNum)
                 {
                     case 0:
-                        AddResourcesByDifficulty(easySprites, 0, 4);
+                        AddSpriteResources(0, easySprites, 0, 5);
+                        AddTargetResources(0, 5);
                         break;
                     case 1:
-                        AddResourcesByDifficulty(easySprites, 5, 10);
+                        AddSpriteResources(1, easySprites, 5, 10);
+                        AddTargetResources(5, 5);
                         break;
                 }
-
-                ActivateButtons(5);
                 break;
+
             case GroundModel.Difficulty.Normal:
-                switch (number)
+                switch (stageNum)
                 {
                     case 0:
-                        AddResourcesByDifficulty(normalSprites, 0, 6);
+                        AddSpriteResources(0, normalSprites, 0, 6);
+                        AddTargetResources(10, 6);
                         break;
                     case 1:
-                        AddResourcesByDifficulty(normalSprites, 7, 12);
+                        AddSpriteResources(0, normalSprites, 6, 12);
+                        AddTargetResources(16, 6);
                         break;
                     case 2:
-                        AddResourcesByDifficulty(normalSprites, 13, 18);
+                        AddSpriteResources(0, normalSprites, 12, 18);
+                        AddTargetResources(22, 6);
                         break;
                     case 3:
-                        AddResourcesByDifficulty(normalSprites, 18, 24);
+                        AddSpriteResources(1, normalSprites, 18, 24);
+                        AddTargetResources(28, 6);
                         break;
                 }
-
-                ActivateButtons(6);
                 break;
+
             case GroundModel.Difficulty.Hard:
-                switch (number)
+                switch (stageNum)
                 {
                     case 0:
-                        AddResourcesByDifficulty(hardSprites, 0, 8);
+                        AddSpriteResources(0, hardSprites, 0, 8);
+                        AddTargetResources(34, 8);
                         break;
                     case 1:
-                        AddResourcesByDifficulty(hardSprites, 9, 16);
+                        AddSpriteResources(0, hardSprites, 8, 16);
+                        AddTargetResources(42, 8);
                         break;
                     case 2:
-                        AddResourcesByDifficulty(hardSprites, 16, 24);
+                        AddSpriteResources(0, hardSprites, 16, 24);
+                        AddTargetResources(50, 8);
                         break;
                     case 3:
-                        AddResourcesByDifficulty(hardSprites, 25, 32);
+                        AddSpriteResources(1, hardSprites, 24, 32);
+                        AddTargetResources(58, 8);
                         break;
                     case 4:
-                        AddResourcesByDifficulty(hardSprites, 33, 40);
+                        AddSpriteResources(1, hardSprites, 32, 40);
+                        AddTargetResources(66, 8);
                         break;
                 }
-
-                ActivateButtons(8);
                 break;
         }
 
-        FindLastActiveImageButton()
-            .OnClickAsObservable()
-            .Subscribe(delegate { OnGameClear(); })
-            .AddTo(clearButtonDisposables);
+        GroundModel.InitializationStageLevel();
 
-        void AddResourcesByDifficulty(List<Sprites> currentSprites, int startIndex, int endIndex)
+        GroundModel.StageLevel
+            .AsObservable()
+            .Subscribe(OnCurrentLevelHandler)
+            .AddTo(clearDisposables);
+
+        void AddSpriteResources(int stageNum, List<Sprites> curDifficultySprites, int startIndex, int endIndex)
         {
+            curStage.sprite = backGroundSprites[stageNum];
+
             for (int i = startIndex; i < endIndex; i++)
             {
-                if (currentSprites[i] != null)
-                {
-                    if (currentSprites[i].quest != null)
-                    {
-                        currentQuestSprites.Add(currentSprites[i].quest);
-                    }
-
-                    if (currentSprites[i].hint != null)
-                    {
-                        currentHintSprites.Add(currentSprites[i].hint);
-                    }
-
-                    if (currentSprites[i].item != null)
-                    {
-                        currentItemSprites.Add(currentSprites[i].item);
-                    }
-                }
-
-                if (gameItems[i] != null)
-                {
-                    currentTargets.Add(gameItems[i]);
-                }
+                curQuestSprites.Add(curDifficultySprites[i].quest);
+                curHintSprites.Add(curDifficultySprites[i].hint);
+                curTargetSprites.Add(curDifficultySprites[i].target);
             }
         }
 
-        void ActivateButtons(int count)
+        void AddTargetResources(int index, int count)
         {
-            for (int i = 0; i < count; i++)
+            curTargets.AddRange(gameItems.GetRange(index, count));
+
+            for (int i = 0; i < curTargets.Count; i++)
             {
+                targetButtons[i].GetComponent<RectTransform>().anchoredPosition = curTargets[i].anchoredPos;
                 targetButtons[i].gameObject.SetActive(true);
+                var image = targetButtons[i].GetComponent<Image>();
+                image.sprite = curTargetSprites[i];
+                image.SetNativeSize();
             }
-        }
-
-        Button FindLastActiveImageButton()
-        {
-            for (int i = targetButtons.Count - 1; i >= 0; i--)
-            {
-                Image imageComponent = targetButtons[i].GetComponent<Image>();
-
-                if (imageComponent != null && imageComponent.enabled)
-                {
-                    return targetButtons[i];
-                }
-            }
-
-            return null;
         }
     }
 
+    private void OnCurrentLevelHandler(int level)
+    {
+        if (level >= curQuestSprites.Count && level >= curHintSprites.Count)
+        {
+            OnGameClear();
+            return;
+        }
+
+        var image = targetButtons[level].GetComponent<Image>();
+        image.raycastTarget = true;
+
+        targetButtons[level]
+            .OnClickAsObservable()
+            .Subscribe(delegate
+                {
+                    targetButtons[level].gameObject.SetActive(false);
+                    GroundModel.RaiseNextLevel();
+                })
+            .AddTo(clearDisposables);
+
+        if (curQuestSprites[level] != null)
+        {
+            questImage.sprite = curQuestSprites[level];
+        }
+
+        if (curHintSprites[level] != null)
+        {
+            hintImage.sprite = curHintSprites[level];
+        }
+
+        Debug.Log($"GroundingSceneManager.OnCurrentLevelHandler(): GroundModel.CurrentLevel Value is [{level}]");
+    }
+
     private void OnGameClear()
-        => GroundModel.RaiseOnGameClear();
+    {
+        SceneLevelModel.CurrentSceneLevel = 13;
+        SceneLevelModel.SceneLevel.OnNext(13);
+        Debug.Log($"GroundingSceneManager.OnGameClear()");
+    }
 
     private void OnGameFail()
-        => GroundModel.RaiseOnGameFail();
-    
-    private void SetCurrentTargets()
     {
-        for (int i = 0; i < currentTargets.Count; i++)
-        {
-            targetButtons[i].transform.position = currentTargets[i].anchoredPos;
-            targetButtons[i].image.sprite = currentItemSprites[i];
-        }
+        SceneLevelModel.CurrentSceneLevel = 14;
+        SceneLevelModel.SceneLevel.OnNext(14);
+        Debug.Log($"GroundingSceneManager.OnGameFail()");
     }
 }

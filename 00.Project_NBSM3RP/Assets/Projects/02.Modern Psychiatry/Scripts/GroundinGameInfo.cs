@@ -13,7 +13,7 @@ public class GroundinGameInfo : MonoBehaviour
 
     private void Start()
     {
-        GroundModel.InitializationModel();
+        GroundModel.InitializationGameDifficulty();
 
         GroundModel.CurrentDifficulty
             .AsObservable()
@@ -22,7 +22,7 @@ public class GroundinGameInfo : MonoBehaviour
 
         startButton
             .OnClickAsObservable()
-            .Subscribe(delegate { GroundModel.RaiseMainGameStart(GroundModel.CurrentDifficulty.Value); })
+            .Subscribe(delegate { GroundModel.RaiseGameStart(GroundModel.CurrentDifficulty.Value); })
             .AddTo(gameObject);
     }
 
