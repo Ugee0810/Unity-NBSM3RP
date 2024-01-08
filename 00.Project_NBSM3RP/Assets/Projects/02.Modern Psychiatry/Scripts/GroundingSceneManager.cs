@@ -114,8 +114,8 @@ public class GroundingSceneManager : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             cursorCircle
-                .DOMove(Input.mousePosition, 0.4f)
-                .SetEase(Ease.Linear);
+                .DOMove(Input.mousePosition, 0.2f)
+                .SetEase(Ease.OutQuint);
         }
 
         if (Input.GetMouseButtonUp(0))
