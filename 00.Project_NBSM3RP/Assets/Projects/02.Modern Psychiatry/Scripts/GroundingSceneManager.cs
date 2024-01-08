@@ -40,7 +40,6 @@ public class GroundingSceneManager : MonoBehaviour
 
     [Space(10), Header("[SFX]")]
     [ReadOnly(false), SerializeField] private AudioSource sfx;
-    private Coroutine bgmCoroutine = null;
 
     [Space(10), Header("[ETC]")]
     [SerializeField] private float moveSpeed = 3.0f;
@@ -61,13 +60,19 @@ public class GroundingSceneManager : MonoBehaviour
                 {
                     TouchMovementRestriction();
                     OnUpdateRotateCursorCircle();
+                    ToggleSound();
                     TimerUpdate();
                 })
             .AddTo(gameObject);
 
+        Observable
+            .EveryUpdate()
+            .Select(_ => canvasGroup.alpha == 0 && sfx.isPlaying)
+            .DistinctUntilChanged()
+            .Subscribe(delegate { sfx.Stop(); })
+            .AddTo(gameObject);
+
         GroundModel.OnGameStart += OnGameStart;
-        GroundModel.OnGameClear += OnGameClear;
-        GroundModel.OnGameFail += OnGameFail;
     }
 
     private void TouchMovementRestriction()
@@ -128,6 +133,18 @@ public class GroundingSceneManager : MonoBehaviour
                         isTouching = false;
                     }
             );
+        }
+    }
+
+    private void ToggleSound()
+    {
+        if (sfx.isPlaying)
+        {
+            return;
+        }
+        else
+        {
+            sfx.Play();
         }
     }
 
@@ -223,12 +240,6 @@ public class GroundingSceneManager : MonoBehaviour
 
         SetInitialTime();
 
-        if (bgmCoroutine != null)
-        {
-            StopCoroutine(bgmCoroutine);
-        }
-        bgmCoroutine = StartCoroutine(PlayBGMWithDelay(0.3f));
-
         GroundModel.InitializationStageLevel();
 
         GroundModel.StageLevel
@@ -264,17 +275,6 @@ public class GroundingSceneManager : MonoBehaviour
                 image.SetNativeSize();
             }
         }
-
-        IEnumerator PlayBGMWithDelay(float delay)
-        {
-            yield return new WaitForSeconds(sfx.clip.length + delay);
-            while (true)
-            {
-                sfx.Play();
-                yield return new WaitForSeconds(sfx.clip.length + delay);
-            }
-        }
-
     }
 
     private void OnCurrentLevelHandler(int level)
@@ -313,7 +313,6 @@ public class GroundingSceneManager : MonoBehaviour
 
     private void OnGameClear()
     {
-        StopBGM();
         SceneLevelModel.CurrentSceneLevel = 13;
         SceneLevelModel.SceneLevel.OnNext(13);
         GroundModel.RaiseGameClear();
@@ -322,7 +321,6 @@ public class GroundingSceneManager : MonoBehaviour
 
     private void OnGameFail()
     {
-        StopBGM();
         SceneLevelModel.CurrentSceneLevel = 14;
         SceneLevelModel.SceneLevel.OnNext(14);
         GroundModel.RaiseGameFail();
@@ -397,15 +395,5 @@ public class GroundingSceneManager : MonoBehaviour
         }
 
         fillSliderImage.fillAmount = targetFillAmount;
-    }
-
-    private void StopBGM()
-    {
-        if (bgmCoroutine != null)
-        {
-            StopCoroutine(bgmCoroutine);
-            bgmCoroutine = null;
-        }
-        sfx.Stop();
     }
 }

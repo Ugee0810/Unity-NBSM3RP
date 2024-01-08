@@ -8372,11 +8372,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 51c532d581d2f462d91748634731f0c0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 91eb5b07ff6709a4d8bd5834411f24a7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -10906,7 +10906,6 @@ MonoBehaviour:
   curTargetSprites: []
   curTargets: []
   sfx: {fileID: 1722638711}
-  isSFXPlay: 0
   moveSpeed: 4
   minX: -1550
   maxX: 1600
