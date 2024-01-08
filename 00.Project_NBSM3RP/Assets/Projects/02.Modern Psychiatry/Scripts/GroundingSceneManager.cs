@@ -199,7 +199,7 @@ public class GroundingSceneManager : MonoBehaviour
                         AddTargetResources(16, 6);
                         break;
                     case 2:
-                        AddSpriteResources(3, normalSprites, 12, 18, 1);
+                        AddSpriteResources(3, normalSprites, 12, 18, 0);
                         AddTargetResources(22, 6);
                         break;
                     case 3:

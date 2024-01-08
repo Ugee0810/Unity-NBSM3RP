@@ -10475,7 +10475,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092112604}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -10730,158 +10730,158 @@ MonoBehaviour:
   - quest: {fileID: 21300000, guid: cae74e43793340844882a30a7dc50b50, type: 3}
     hint: {fileID: 21300000, guid: e909a174a1359d34d96a6986d6d83fa1, type: 3}
     target: {fileID: 21300000, guid: f907ad445a9412041a0f89b8ebe86ff6, type: 3}
-  - quest: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+  - quest: {fileID: 21300000, guid: 5b7e315e30654624ca8fa7fdee283ad4, type: 3}
     hint: {fileID: 21300000, guid: c2c59fafd6413d647a30ae4e5ec381ad, type: 3}
     target: {fileID: 21300000, guid: cc208491fa4a09a4689aa8322bffdcf7, type: 3}
   gameItems:
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 500, y: 0}
+    anchoredPos: {x: 1289, y: -90}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 400, y: 0}
+    anchoredPos: {x: -355, y: -747}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 300, y: 0}
+    anchoredPos: {x: -5904, y: -2200}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 200, y: 0}
+    anchoredPos: {x: -6035, y: -498}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 100, y: 0}
+    anchoredPos: {x: 2797.2, y: -2118}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 7120, y: 1713}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 5883, y: -1345}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 2646, y: 2346}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -804, y: -760}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4742, y: 1167}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 4702, y: -1964}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 4156, y: 705}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 26, y: -372}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2174, y: 1380}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4461, y: -1722}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -7381, y: 1549}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 7087, y: -1858}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1628, y: 1686}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 43, y: 554}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2316, y: 1671}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4542, y: -550}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6993, y: 38}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 5890, y: 163}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 2479, y: -569}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1389, y: 1168}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -1404, y: 727}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -3127, y: 404}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6512, y: 867}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 6001, y: -519}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 3676, y: 2224}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 4110, y: -1924}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -226, y: 1833}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -376, y: 852}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6696, y: -544}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 6911, y: -2315}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 5830, y: 42}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1691, y: 219}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2191, y: -1998}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -5018, y: 2556}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6008, y: 567}
   - item: {fileID: 833605202}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6182, y: -1799}
   - item: {fileID: 969951595}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -7336, y: 1447}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 6966, y: -1696}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 3316, y: -432}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1386, y: 1039}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -1179, y: -585}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2127, y: 2067}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2525, y: -2156}
   - item: {fileID: 833605202}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6037, y: 643}
   - item: {fileID: 969951595}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -7153, y: 1633}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 7204, y: -1255}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 4831, y: 1663}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 3703, y: 652}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1264, y: -570}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -1223, y: 2601}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2324, y: -1830}
   - item: {fileID: 833605202}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4553, y: -620}
   - item: {fileID: 969951595}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -6092, y: -682}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 6390, y: -1390}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 5490, y: 1440}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1850, y: 1759}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -2475, y: 2182}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -3647, y: 1857}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4820, y: 654}
   - item: {fileID: 833605202}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4968, y: -1668}
   - item: {fileID: 969951595}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -7009, y: 300}
   - item: {fileID: 1145344301}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 7565, y: -521}
   - item: {fileID: 298473787}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 5274, y: -1520}
   - item: {fileID: 601363896}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 3193, y: -1884}
   - item: {fileID: 1825217331}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 1790, y: 1012}
   - item: {fileID: 1474956198}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: 617, y: -2037}
   - item: {fileID: 375687326}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -838, y: -819}
   - item: {fileID: 833605202}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -854, y: -2159}
   - item: {fileID: 969951595}
-    anchoredPos: {x: 0, y: 0}
+    anchoredPos: {x: -4171, y: 752}
   canvasGroup: {fileID: 2092112607}
   stage: {fileID: 1656607095}
   cursorCircle: {fileID: 1570294032}
@@ -10907,8 +10907,8 @@ MonoBehaviour:
   curTargets: []
   sfx: {fileID: 1722638711}
   moveSpeed: 4
-  minX: -1550
-  maxX: 1600
+  minX: -730
+  maxX: 1230
   timeRemaining: 0
   maxTime: 0
   rotationState: 0
