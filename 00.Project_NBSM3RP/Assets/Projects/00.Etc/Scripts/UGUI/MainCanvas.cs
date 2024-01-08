@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
-using System.ComponentModel;
 
 public class MainCanvas : MonoBehaviour
 {
@@ -55,8 +54,7 @@ public class MainCanvas : MonoBehaviour
     {
         if (SceneLevelModel.CurrentSceneLevel == canvasGroups.Count - 1) return;
 
-        SceneLevelModel.SceneLevel
-            .OnNext(SceneLevelModel.NextSceneLevel());
+        SceneLevelModel.SceneLevel.OnNext(SceneLevelModel.NextSceneLevel());
 
         Debug.Log("MainCanvas.NextSceneHandler(): Shift+2 Pressed");
     }
@@ -65,8 +63,7 @@ public class MainCanvas : MonoBehaviour
     {
         if (SceneLevelModel.CurrentSceneLevel == 0) return;
 
-        SceneLevelModel.SceneLevel
-            .OnNext(SceneLevelModel.PrevSceneLevel());
+        SceneLevelModel.SceneLevel.OnNext(SceneLevelModel.PrevSceneLevel());
 
         Debug.Log("MainCanvas.PreviousSceneHandler(): Shift+1 Pressed");
     }

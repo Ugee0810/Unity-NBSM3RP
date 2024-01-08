@@ -19,4 +19,10 @@ public static partial class SceneLevelModel
 
     public static int PrevSceneLevel()
         => CurrentSceneLevel - 1;
+
+    public static void OnNextSceneLevel(int level)
+    {
+        CurrentSceneLevel = level;
+        SceneLevel.OnNext(level);
+    }
 }
