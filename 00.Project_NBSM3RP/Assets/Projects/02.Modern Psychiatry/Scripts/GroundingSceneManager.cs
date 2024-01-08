@@ -43,8 +43,8 @@ public class GroundingSceneManager : MonoBehaviour
 
     [Space(10), Header("[ETC]")]
     [SerializeField] private float moveSpeed = 3.0f;
-    [SerializeField] private float minX = -1550.0f;
-    [SerializeField] private float maxX = 2600.0f;
+    [SerializeField] private float minX = -730.0f/* -1550.0f */;
+    [SerializeField] private float maxX = 1230.0f/* 2600.0f */;
     [SerializeField] private float timeRemaining;
     [SerializeField] private float maxTime;
     [ReadOnly(false), SerializeField] private float rotationState = 0f;
@@ -95,7 +95,7 @@ public class GroundingSceneManager : MonoBehaviour
     {
         if (!isTouching)
         {
-            rotationState += 360f / 4f * Time.deltaTime;
+            rotationState -= 360f / 4f * Time.deltaTime;
 
             Vector2 centerPoint = new(Screen.width / 2, Screen.height / 2);
             float radius = Mathf.Min(Screen.width, Screen.height) / 4;
