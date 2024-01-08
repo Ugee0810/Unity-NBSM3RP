@@ -10,7 +10,10 @@ using DG.Tweening;
 public class GroundingSceneManager : MonoBehaviour
 {
     [Header("[Resources]")]
-    [SerializeField] private List<Sprite> backGroundSprites;
+    [SerializeField] private List<Sprite> stageSprites;
+    [SerializeField] private List<Sprite> logoSprites;
+    [SerializeField] private List<Sprite> emptySliderSprites;
+    [SerializeField] private List<Sprite> fillSliderSprites;
     [SerializeField] private List<Sprites> easySprites;
     [SerializeField] private List<Sprites> normalSprites;
     [SerializeField] private List<Sprites> hardSprites;
@@ -18,11 +21,13 @@ public class GroundingSceneManager : MonoBehaviour
 
     [Space(10), Header("[UGUI]")]
     [ReadOnly(false), SerializeField] private CanvasGroup canvasGroup;
-    [ReadOnly(false), SerializeField] private Transform backGround;
+    [ReadOnly(false), SerializeField] private Transform stage;
     [ReadOnly(false), SerializeField] private RectTransform cursorCircle;
     [ReadOnly(false), SerializeField] private Image questImage;
     [ReadOnly(false), SerializeField] private Image hintImage;
-    [ReadOnly(false), SerializeField] private Image sliderImage;
+    [ReadOnly(false), SerializeField] private Image emptySliderImage;
+    [ReadOnly(false), SerializeField] private Image fillSliderImage;
+    [ReadOnly(false), SerializeField] private Image logoImage;
     [ReadOnly(false), SerializeField] private TMP_Text sliderText;
     [ReadOnly(false), SerializeField] private List<Button> targetButtons;
 
@@ -35,7 +40,7 @@ public class GroundingSceneManager : MonoBehaviour
 
     [Space(10), Header("[SFX]")]
     [ReadOnly(false), SerializeField] private AudioSource sfx;
-    [ReadOnly(false), SerializeField] private bool isSFXPlay = false;
+    private Coroutine bgmCoroutine = null;
 
     [Space(10), Header("[ETC]")]
     [SerializeField] private float moveSpeed = 3.0f;
@@ -56,41 +61,21 @@ public class GroundingSceneManager : MonoBehaviour
                 {
                     TouchMovementRestriction();
                     OnUpdateRotateCursorCircle();
-                    PlaySFX();
                     TimerUpdate();
                 })
             .AddTo(gameObject);
 
         GroundModel.OnGameStart += OnGameStart;
+        GroundModel.OnGameClear += OnGameClear;
+        GroundModel.OnGameFail += OnGameFail;
     }
-
-#if UNITY_EDITOR
-    public Sprite testSprite;
-    private void OnValidate()
-    {
-        foreach (var item in easySprites)
-        {
-            item.target = testSprite;
-        }
-
-        foreach (var item in normalSprites)
-        {
-            item.target = testSprite;
-        }
-
-        foreach (var item in hardSprites)
-        {
-            item.target = testSprite;
-        }
-    }
-#endif
 
     private void TouchMovementRestriction()
     {
         Vector3 mousePosition = Input.mousePosition;
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         float directionX = mousePosition.x - screenCenter.x;
-        Vector3 newPosition = backGround.position - new Vector3(directionX, 0, 0) * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = stage.position - new Vector3(directionX, 0, 0) * moveSpeed * Time.deltaTime;
 
         newPosition.x = Mathf.Clamp(
             value: newPosition.x,
@@ -98,7 +83,7 @@ public class GroundingSceneManager : MonoBehaviour
             max: maxX
         );
 
-        backGround.position = newPosition;
+        stage.position = newPosition;
     }
 
     private void OnUpdateRotateCursorCircle()
@@ -107,8 +92,8 @@ public class GroundingSceneManager : MonoBehaviour
         {
             rotationState += 360f / 4f * Time.deltaTime;
 
-            Vector2 centerPoint = new(1081 / 2, 1921 / 2);
-            float radius = Mathf.Min(1081, 1921) / 4;
+            Vector2 centerPoint = new(Screen.width / 2, Screen.height / 2);
+            float radius = Mathf.Min(Screen.width, Screen.height) / 4;
             float radian = rotationState * Mathf.Deg2Rad;
             Vector2 newPosition = centerPoint + new Vector2(Mathf.Cos(radian) * radius, Mathf.Sin(radian) * radius);
 
@@ -130,8 +115,8 @@ public class GroundingSceneManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Vector2 centerPoint = new(1081 / 2, 1921 / 2);
-            float radius = Mathf.Min(1081, 1921) / 4;
+            Vector2 centerPoint = new(Screen.width / 2, Screen.height / 2);
+            float radius = Mathf.Min(Screen.width, Screen.height) / 4;
             float radian = rotationState * Mathf.Deg2Rad;
             Vector2 newPosition = centerPoint + new Vector2(Mathf.Cos(radian) * radius, Mathf.Sin(radian) * radius);
 
@@ -143,47 +128,6 @@ public class GroundingSceneManager : MonoBehaviour
                         isTouching = false;
                     }
             );
-        }
-    }
-
-    private void PlaySFX()
-    {
-        if (canvasGroup.alpha == 0)
-        {
-            if (sfx.isPlaying)
-            {
-                sfx.Stop();
-            }
-
-            isSFXPlay = false;
-            StopAllCoroutines();
-        }
-        else
-        {
-            if (isSFXPlay)
-            {
-                return;
-            }
-            else
-            {
-                StartCoroutine(PlayWithDelay(0.3f));
-                isSFXPlay = true;
-            }
-        }
-
-        IEnumerator PlayWithDelay(float delay)
-        {
-            sfx.Play();
-
-            while (sfx.isPlaying)
-            {
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(delay);
-
-            isSFXPlay = false;
-            PlaySFX();
         }
     }
 
@@ -216,11 +160,11 @@ public class GroundingSceneManager : MonoBehaviour
                 switch (stageNum)
                 {
                     case 0:
-                        AddSpriteResources(0, easySprites, 0, 5);
+                        AddSpriteResources(0, easySprites, 0, 5, 0);
                         AddTargetResources(0, 5);
                         break;
                     case 1:
-                        AddSpriteResources(1, easySprites, 5, 10);
+                        AddSpriteResources(1, easySprites, 5, 10, 1);
                         AddTargetResources(5, 5);
                         break;
                 }
@@ -230,19 +174,19 @@ public class GroundingSceneManager : MonoBehaviour
                 switch (stageNum)
                 {
                     case 0:
-                        AddSpriteResources(0, normalSprites, 0, 6);
+                        AddSpriteResources(2, normalSprites, 0, 6, 0);
                         AddTargetResources(10, 6);
                         break;
                     case 1:
-                        AddSpriteResources(0, normalSprites, 6, 12);
+                        AddSpriteResources(2, normalSprites, 6, 12, 0);
                         AddTargetResources(16, 6);
                         break;
                     case 2:
-                        AddSpriteResources(0, normalSprites, 12, 18);
+                        AddSpriteResources(3, normalSprites, 12, 18, 1);
                         AddTargetResources(22, 6);
                         break;
                     case 3:
-                        AddSpriteResources(1, normalSprites, 18, 24);
+                        AddSpriteResources(3, normalSprites, 18, 24, 1);
                         AddTargetResources(28, 6);
                         break;
                 }
@@ -252,23 +196,23 @@ public class GroundingSceneManager : MonoBehaviour
                 switch (stageNum)
                 {
                     case 0:
-                        AddSpriteResources(0, hardSprites, 0, 8);
+                        AddSpriteResources(4, hardSprites, 0, 8, 0);
                         AddTargetResources(34, 8);
                         break;
                     case 1:
-                        AddSpriteResources(0, hardSprites, 8, 16);
+                        AddSpriteResources(4, hardSprites, 8, 16, 0);
                         AddTargetResources(42, 8);
                         break;
                     case 2:
-                        AddSpriteResources(0, hardSprites, 16, 24);
+                        AddSpriteResources(4, hardSprites, 16, 24, 0);
                         AddTargetResources(50, 8);
                         break;
                     case 3:
-                        AddSpriteResources(1, hardSprites, 24, 32);
+                        AddSpriteResources(5, hardSprites, 24, 32, 1);
                         AddTargetResources(58, 8);
                         break;
                     case 4:
-                        AddSpriteResources(1, hardSprites, 32, 40);
+                        AddSpriteResources(6, hardSprites, 32, 40, 1);
                         AddTargetResources(66, 8);
                         break;
                 }
@@ -279,6 +223,12 @@ public class GroundingSceneManager : MonoBehaviour
 
         SetInitialTime();
 
+        if (bgmCoroutine != null)
+        {
+            StopCoroutine(bgmCoroutine);
+        }
+        bgmCoroutine = StartCoroutine(PlayBGMWithDelay(0.3f));
+
         GroundModel.InitializationStageLevel();
 
         GroundModel.StageLevel
@@ -286,9 +236,12 @@ public class GroundingSceneManager : MonoBehaviour
             .Subscribe(OnCurrentLevelHandler)
             .AddTo(clearDisposables);
 
-        void AddSpriteResources(int stageNum, List<Sprites> curDifficultySprites, int startIndex, int endIndex)
+        void AddSpriteResources(int stageNum, List<Sprites> curDifficultySprites, int startIndex, int endIndex, int mapInfo)
         {
-            curStage.sprite = backGroundSprites[stageNum];
+            curStage.sprite = stageSprites[stageNum];
+            logoImage.sprite = logoSprites[mapInfo];
+            emptySliderImage.sprite = emptySliderSprites[mapInfo];
+            fillSliderImage.sprite = fillSliderSprites[mapInfo];
 
             for (int i = startIndex; i < endIndex; i++)
             {
@@ -311,6 +264,17 @@ public class GroundingSceneManager : MonoBehaviour
                 image.SetNativeSize();
             }
         }
+
+        IEnumerator PlayBGMWithDelay(float delay)
+        {
+            yield return new WaitForSeconds(sfx.clip.length + delay);
+            while (true)
+            {
+                sfx.Play();
+                yield return new WaitForSeconds(sfx.clip.length + delay);
+            }
+        }
+
     }
 
     private void OnCurrentLevelHandler(int level)
@@ -349,6 +313,7 @@ public class GroundingSceneManager : MonoBehaviour
 
     private void OnGameClear()
     {
+        StopBGM();
         SceneLevelModel.CurrentSceneLevel = 13;
         SceneLevelModel.SceneLevel.OnNext(13);
         GroundModel.RaiseGameClear();
@@ -357,6 +322,7 @@ public class GroundingSceneManager : MonoBehaviour
 
     private void OnGameFail()
     {
+        StopBGM();
         SceneLevelModel.CurrentSceneLevel = 14;
         SceneLevelModel.SceneLevel.OnNext(14);
         GroundModel.RaiseGameFail();
@@ -365,12 +331,12 @@ public class GroundingSceneManager : MonoBehaviour
 
     private void TimerUpdate()
     {
-        if (isSFXPlay && timeRemaining > 0)
+        if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
             StartCoroutine(UpdateTimeUI(Time.deltaTime));
         }
-        else if (isSFXPlay && timeRemaining <= 0)
+        else if (timeRemaining <= 0)
         {
             OnGameFail();
         }
@@ -390,7 +356,7 @@ public class GroundingSceneManager : MonoBehaviour
                 maxTime = timeRemaining = 5f;
                 break;
         }
-        sliderImage.fillAmount = 1;
+        fillSliderImage.fillAmount = 1;
     }
 
     private void FoundTarget()
@@ -418,18 +384,28 @@ public class GroundingSceneManager : MonoBehaviour
     private IEnumerator UpdateTimeUI(float animationDuration)
     {
         float targetFillAmount = timeRemaining / maxTime;
-        float startFillAmount = sliderImage.fillAmount;
+        float startFillAmount = fillSliderImage.fillAmount;
         float elapsedTime = 0;
 
         while (elapsedTime < animationDuration)
         {
             elapsedTime += Time.deltaTime;
             float newFillAmount = Mathf.Lerp(startFillAmount, targetFillAmount, elapsedTime / animationDuration);
-            sliderImage.fillAmount = newFillAmount;
+            fillSliderImage.fillAmount = newFillAmount;
             sliderText.text = "제한 시간 : " + timeRemaining.ToString("F0") + "초";
             yield return null;
         }
 
-        sliderImage.fillAmount = targetFillAmount;
+        fillSliderImage.fillAmount = targetFillAmount;
+    }
+
+    private void StopBGM()
+    {
+        if (bgmCoroutine != null)
+        {
+            StopCoroutine(bgmCoroutine);
+            bgmCoroutine = null;
+        }
+        sfx.Stop();
     }
 }

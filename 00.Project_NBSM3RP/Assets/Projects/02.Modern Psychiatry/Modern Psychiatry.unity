@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028373, g: 0.22571398, b: 0.30692294, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6378,7 +6378,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -400}
-  m_SizeDelta: {x: 2238, y: 1155.0615}
+  m_SizeDelta: {x: 1505, y: 526}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230662765
 MonoBehaviour:
@@ -6400,7 +6400,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 903756d0f48863845b74a5053f80697a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7892,7 +7892,7 @@ GameObject:
   - component: {fileID: 1656607097}
   - component: {fileID: 1656607096}
   m_Layer: 5
-  m_Name: BackGround
+  m_Name: Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10458,8 +10458,8 @@ RectTransform:
   - {fileID: 1560356258}
   - {fileID: 799222469}
   - {fileID: 243644835}
-  - {fileID: 464019304}
   - {fileID: 2065893609}
+  - {fileID: 464019304}
   m_Father: {fileID: 284071133}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10491,234 +10491,248 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888d484e430974d8cb756b42c09c153b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backGroundSprites:
-  - {fileID: 21300000, guid: a6b6958077728534c813f3c76475dc31, type: 3}
-  - {fileID: 21300000, guid: a3f3834d7134bc74fa6eebbc599b73a7, type: 3}
+  stageSprites:
+  - {fileID: 21300000, guid: 2e84fdc795951294688b28846d0711d6, type: 3}
+  - {fileID: 21300000, guid: cd642a29c268f384b9431e34d92badf8, type: 3}
+  - {fileID: 21300000, guid: e0c0f19f1e4f5804b8b0fbfb06f4e5a6, type: 3}
+  - {fileID: 21300000, guid: d8dd186d8912db14a895186398b373f3, type: 3}
+  - {fileID: 21300000, guid: 4558b4b91d38b204da1bea2d02926c80, type: 3}
+  - {fileID: 21300000, guid: 6082efd7a454b074eae92af3e93a5579, type: 3}
+  - {fileID: 21300000, guid: 11ed5bfcd329f804bb6e6d959d7ad2ef, type: 3}
+  logoSprites:
+  - {fileID: 21300000, guid: bf875d5f44021cc4199b8596eb7091a5, type: 3}
+  - {fileID: 21300000, guid: e5fb75a0a7844584dbf6d75e3fb955b9, type: 3}
+  emptySliderSprites:
+  - {fileID: 21300000, guid: 3a894f3e5330534448d27e89999c98bd, type: 3}
+  - {fileID: 21300000, guid: c6dc604a618c14b4eae5175fff8e436e, type: 3}
+  fillSliderSprites:
+  - {fileID: 21300000, guid: d3c6ff0d07d069a439e4e24cda0a64c3, type: 3}
+  - {fileID: 21300000, guid: 37bd2de8dbc87534b8c463a039c24ca4, type: 3}
   easySprites:
   - quest: {fileID: 21300000, guid: ccc6f6548bd880145a1264d24c94f060, type: 3}
     hint: {fileID: 21300000, guid: 8697c6bba58722f4c8af27d8e07bb406, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: ed49d7c8826096e4f9f361bde6e595ca, type: 3}
   - quest: {fileID: 21300000, guid: ad8e1b368669c24448f96ce517cc0775, type: 3}
     hint: {fileID: 21300000, guid: 96ccdc03c471ddb45addceedb337e8da, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 293808e4aa80bc2448c4e39c1ed117c8, type: 3}
   - quest: {fileID: 21300000, guid: a431a33d7e384ec44beca83114aeb179, type: 3}
     hint: {fileID: 21300000, guid: 6e1f90783eff5cc489ce33c2d013d006, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 82b2f4897a8aea84cba1f3ef712e3f26, type: 3}
   - quest: {fileID: 21300000, guid: f622b7e3657da4340ad1fbfaac027d96, type: 3}
     hint: {fileID: 21300000, guid: 66f3dd788109c0b4bb535f80b74774cb, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 54a83eb2f25473b4898f5f23eb30aec2, type: 3}
   - quest: {fileID: 21300000, guid: 3a251dc10e297c140a81f0bda2243fa8, type: 3}
     hint: {fileID: 21300000, guid: 56e0a1b4e53ad0d4da0b38a093f11bce, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 2e5f6377c52942142ac4dbb1c145e91c, type: 3}
   - quest: {fileID: 21300000, guid: fba07c8c87336254cb2d387e27dc92a4, type: 3}
     hint: {fileID: 21300000, guid: 487d2feb66fd57b4f9d81b42e2c3ba1b, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 4548b9d128b27d942a2fcca7a9fb6e09, type: 3}
   - quest: {fileID: 21300000, guid: 82c2c8634af0dc64f92905d955cd2a18, type: 3}
     hint: {fileID: 21300000, guid: 1eb4614ca3f05224c884609dd8dec83a, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 53595cbed1860f2448ee424ae5b59368, type: 3}
   - quest: {fileID: 21300000, guid: b9a35d3c8f5f00f43afd151b1908441c, type: 3}
     hint: {fileID: 21300000, guid: e3df313246677d547b95c6167c9f9cc1, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: f3befb9e2be77e54f8ae515545dddb34, type: 3}
   - quest: {fileID: 21300000, guid: e41bd8d22ec174e45a36ff5dd542ed62, type: 3}
     hint: {fileID: 21300000, guid: d3e7da9624c0e0e46808a9bdd4d8ce8b, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 30bfa4fa0f3198344b1913a8b9a77115, type: 3}
   - quest: {fileID: 21300000, guid: 19b542a7e7538e448951037daa11e8d1, type: 3}
     hint: {fileID: 21300000, guid: d565eafa9efa4ab43bcca647f1996adc, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 77c66c818e7366a42af83388aabcd9ee, type: 3}
   normalSprites:
   - quest: {fileID: 21300000, guid: c6f9f842022fc414cbafe155397d0359, type: 3}
     hint: {fileID: 21300000, guid: 9919f5d045469424cb6c574b5ec21985, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 222b27cfd734f25478e877139e467f31, type: 3}
   - quest: {fileID: 21300000, guid: 32608d5622d3e2b45970a267aaff97c9, type: 3}
     hint: {fileID: 21300000, guid: 67fdff793a3a1a44eb86bf9d1c8574be, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 33b273d63e1620b40b95d671d2fbb928, type: 3}
   - quest: {fileID: 21300000, guid: 78240f7e4168f8748834b20af6ae44fc, type: 3}
     hint: {fileID: 21300000, guid: 98260ccff1db1be46903fad8e8e27f05, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: ec268767f5da1734aab7011556cc132f, type: 3}
   - quest: {fileID: 21300000, guid: 80e2da102d9f9344e9313454b908cebe, type: 3}
     hint: {fileID: 21300000, guid: 3b04798cf8e86b745b8cce8793041f7b, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 9789fb771781d8f46a01d2e595956d60, type: 3}
   - quest: {fileID: 21300000, guid: 6d03fc27a23eadd4f84d03a782e70031, type: 3}
     hint: {fileID: 21300000, guid: 0105c08f9432b75438ff79eeb15e781f, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 1b9a0bb92b697e947b9236ed6dbc4eb4, type: 3}
   - quest: {fileID: 21300000, guid: efe6949dbe0fed4459b38a0b53d079b7, type: 3}
     hint: {fileID: 21300000, guid: 2ce8b1a9fcdbd6148899d9a7922ef301, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: e173f7ce01c20094493102820b14873e, type: 3}
   - quest: {fileID: 21300000, guid: 70729ca4d9072304881a6230bfa81c1c, type: 3}
     hint: {fileID: 21300000, guid: 191e11263c5a9a146a6d91f4a0f809be, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 154786299102bdb4aaeb1b6c20329bc5, type: 3}
   - quest: {fileID: 21300000, guid: 294d446268d980245af01c9188f202c0, type: 3}
     hint: {fileID: 21300000, guid: 937170a80bad8554cb62d3fc2d206869, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: e3ee8ef7b829e0b4383cb62d0a645e64, type: 3}
   - quest: {fileID: 21300000, guid: 900a91ab60b3a684eac876b2d1c04415, type: 3}
     hint: {fileID: 21300000, guid: 697a2be6d2e1a87408d79f59ab5b4057, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 13a357e8b7ba88d45a6ad5eff7ed90b6, type: 3}
   - quest: {fileID: 21300000, guid: 7e3335e2d19b5db42bc448afb41dc62a, type: 3}
     hint: {fileID: 21300000, guid: b57d5691b0765b84a9b55b6fdf4e0184, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 4ae2ab8d592ff7e498fed7d5584ddace, type: 3}
   - quest: {fileID: 21300000, guid: 0859a6a2da7590c4eb5a5d3e00ecae8c, type: 3}
     hint: {fileID: 21300000, guid: 706e1992244d7e548a3e20d845063844, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 600da4a573a00a24db6fcfc3e6c8faad, type: 3}
   - quest: {fileID: 21300000, guid: 2ec16cb4023f7d94cbf88c272a3f95b8, type: 3}
     hint: {fileID: 21300000, guid: 84be87a9856374741a6e9dc387d31afd, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: db064b704a79e95488e0583c485df544, type: 3}
   - quest: {fileID: 21300000, guid: c12922cbf7c461b44b0c482a50afb939, type: 3}
     hint: {fileID: 21300000, guid: a6255459c0fdb3e43b54faa87281be78, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: d79dd57bfd742824cb3126adc0035107, type: 3}
   - quest: {fileID: 21300000, guid: b60a92ee41be40446879d408e83db4ae, type: 3}
     hint: {fileID: 21300000, guid: 989a3ebebb8651c42a50aa2806b5b745, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 20ef92f987b2b574d8347015bae7476d, type: 3}
   - quest: {fileID: 21300000, guid: fa9698a88f78a694e90795460e30cd77, type: 3}
     hint: {fileID: 21300000, guid: db21d8ec23922c0468f39512c145c2bf, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: b0b08bcfb69c07747b75c35cf90cc6ef, type: 3}
   - quest: {fileID: 21300000, guid: 046b368eb2074dd4f9890194c934845a, type: 3}
     hint: {fileID: 21300000, guid: e48b145618d5e4b4aacd0d5698f26206, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 21e0655df94ec7b4abd5a38b268719a4, type: 3}
   - quest: {fileID: 21300000, guid: 321f8b1d6ff9d1846a207cdd964a0b18, type: 3}
     hint: {fileID: 21300000, guid: c08c061de32ba8049a41d9c4fbb6d4b2, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 4287cb1e5cabb2242bdba0764cbfeccf, type: 3}
   - quest: {fileID: 21300000, guid: 5daeba6cdf53f2f4984188818fde368c, type: 3}
     hint: {fileID: 21300000, guid: 574714ae646cae641a5bb504c12a4426, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: bb3bdb95b34645d4796e299f7e56e420, type: 3}
   - quest: {fileID: 21300000, guid: 94c12ace9bbfc074cbbd456eb02f312b, type: 3}
-    hint: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    hint: {fileID: 21300000, guid: 8601c9a15a1e2e54b8d4a755ebe8a392, type: 3}
+    target: {fileID: 21300000, guid: 558ca94788b824c4ba4604df84109436, type: 3}
   - quest: {fileID: 21300000, guid: c33c626f339efe24ebf1332e2873dcd6, type: 3}
-    hint: {fileID: 21300000, guid: 6353a4dd317c3204790714e22705758d, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    hint: {fileID: 21300000, guid: bdc84af176f2d28459aa5b3fc2b5d15f, type: 3}
+    target: {fileID: 21300000, guid: 376499c2e58a31345b7bf8aaf7b48e80, type: 3}
   - quest: {fileID: 21300000, guid: 5d4ea86b5237bad46b52316a72d620c0, type: 3}
     hint: {fileID: 21300000, guid: d420f9af1805e424f9fd4ab049b60817, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 5106ac1291970d94c805c64ca2f07805, type: 3}
   - quest: {fileID: 21300000, guid: 17027bc3e35440343abc150b6b98d7aa, type: 3}
     hint: {fileID: 21300000, guid: 4b8e7d28e80a6d44db278a7379fdbde0, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 35f01204bd0dedd4ba7423fd1ca261dd, type: 3}
   - quest: {fileID: 21300000, guid: 7ecd0fc84f499ed4a9214b41d1f404b3, type: 3}
     hint: {fileID: 21300000, guid: 90e5fe9a31d70f94488feffa5b3fbaf8, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 06576dd7f34366e4ea1e6fcdbcc82f5b, type: 3}
   - quest: {fileID: 21300000, guid: b37cfbadc4d4bb14aa95ba99a3a42f43, type: 3}
     hint: {fileID: 21300000, guid: 27d8710d9d65e054a81d40283ca805b3, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 65e747304e10bb3499a8101a0e8b1086, type: 3}
   hardSprites:
   - quest: {fileID: 21300000, guid: d15aa806cc2e5154398ea3228349f137, type: 3}
     hint: {fileID: 21300000, guid: 73e7b9a7a33da55459bbee385fbb71c4, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: edae77d1d74b3fb428afff6b5425ba2b, type: 3}
   - quest: {fileID: 21300000, guid: fd9e24a29bf64584087cc6022c50e6d5, type: 3}
     hint: {fileID: 21300000, guid: 593a041514868f840af3072768593b71, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: cbfdad0fd627a554988ff30c2a58ca26, type: 3}
   - quest: {fileID: 21300000, guid: c8d31703824ac14428f5132ef0bbaeff, type: 3}
     hint: {fileID: 21300000, guid: d7d0e4052a671904b97a9c03d7ee5349, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 144e95f5f1fc5434dbfc710dcf96c555, type: 3}
   - quest: {fileID: 21300000, guid: e58c4de6912bb3c48a77aaae014cc13c, type: 3}
     hint: {fileID: 21300000, guid: 68566f3d9e3881d49b925b395152ee6a, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 291ea901710c8654c826066a3051ab1a, type: 3}
   - quest: {fileID: 21300000, guid: 6221f56993d2b904b8c317d8b65da31a, type: 3}
     hint: {fileID: 21300000, guid: ae30bef70d724ab449d219e2a6306139, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 8c113540edcd5bc40b4d599c51023dc1, type: 3}
   - quest: {fileID: 21300000, guid: d3be16278d34f8c42baf95f4f391ef2c, type: 3}
     hint: {fileID: 21300000, guid: 74e06f0e5c450294ab646205262418f6, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 139c8136918a08048a0962f7a435907e, type: 3}
   - quest: {fileID: 21300000, guid: 27c8f0d024c9a0a4aa56c28e6bbabfd1, type: 3}
     hint: {fileID: 21300000, guid: f55ab60703c1b8d43b9f85bf9b2bf313, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: c6807aea5b0f7554b96ce245f79d3844, type: 3}
   - quest: {fileID: 21300000, guid: 714839e0a14f8e945b037a91a1a5e38f, type: 3}
     hint: {fileID: 21300000, guid: f20b55e1019d4534bbaf14cdd833463d, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 5f2fec7790d2f5d408354832f32b560b, type: 3}
   - quest: {fileID: 21300000, guid: c433e17088b9c2c47aed8430e79c5c54, type: 3}
     hint: {fileID: 21300000, guid: 0e3fa949f2bc0194b9682abf09c98fbd, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 9000dffaafdbb56488f354e451a11a85, type: 3}
   - quest: {fileID: 21300000, guid: f0f88a4c0817da74f9d23f28e2e2f256, type: 3}
     hint: {fileID: 21300000, guid: ac5bf510f522fff44a5b8c81dd4ba345, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 911df23cac5b90f4680d2e612a2df294, type: 3}
   - quest: {fileID: 21300000, guid: fabf77ca618078b4ba8ffd3617cb7604, type: 3}
     hint: {fileID: 21300000, guid: 880136c023d01644a91c2d7577f43bb2, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 270853cb4e9d186469362404dc7baf16, type: 3}
   - quest: {fileID: 21300000, guid: 710d3dbeb94625748bb346f13a995d62, type: 3}
     hint: {fileID: 21300000, guid: 33d9e6cbd53fdc746a32b4cf669bf075, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 81937fdc6d415724abf4c092b598252e, type: 3}
   - quest: {fileID: 21300000, guid: 50b5a40a99b031f45945745e00c169ba, type: 3}
     hint: {fileID: 21300000, guid: 7ce5217ca44ae134eb0e1b00c4c90818, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 96f58a0b74912694eb4ddb470ba2c9ad, type: 3}
   - quest: {fileID: 21300000, guid: 1705eb7d0b84a4049b7178e3abdd0332, type: 3}
     hint: {fileID: 21300000, guid: caed1abba4244e9408ac98079e0fd8ec, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: be64bfb92075c50468048a3eaf36a0e6, type: 3}
   - quest: {fileID: 21300000, guid: 00f8605b2bd858e469c3b304374cf260, type: 3}
     hint: {fileID: 21300000, guid: 9ef08b6b775d60b4b80e19139bf243cb, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 0078c84fef79d134a8704f4f241b5d48, type: 3}
   - quest: {fileID: 21300000, guid: 837d864af6781b34fa6be350e02810f3, type: 3}
     hint: {fileID: 21300000, guid: be0a2517e93d58243bb049dceb76c422, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 177ee0cc075296d4b9b083677db01a4f, type: 3}
   - quest: {fileID: 21300000, guid: e740ec7424448514288c275fcbfcefd5, type: 3}
     hint: {fileID: 21300000, guid: 9d1f563fe4e89d746912682ec813ee1a, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 52852eaabca6f6645920fdec8dc19edb, type: 3}
   - quest: {fileID: 21300000, guid: aa34d7c8e59309d48bcf5ad30939d66c, type: 3}
     hint: {fileID: 21300000, guid: d456dbb1c0beba644aab8c69dd3c5c6b, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 21550aa27a0dc9542971e45d35b3841c, type: 3}
   - quest: {fileID: 21300000, guid: f65f9434ea103ab4ca900291d90f1514, type: 3}
     hint: {fileID: 21300000, guid: 00acb3283e1052044b90ba3adae72e5e, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 8b74f333305a006498c3945f204efa79, type: 3}
   - quest: {fileID: 21300000, guid: 9c6aaeba07eeace4aa8342725c7a1337, type: 3}
     hint: {fileID: 21300000, guid: 0e2d263256310e64299346dd2e979f5a, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: fbcee582d0a9c414e8c7822a0888e1c5, type: 3}
   - quest: {fileID: 21300000, guid: 8eff352a967cc0a4b8b43e4b5e2eaff8, type: 3}
     hint: {fileID: 21300000, guid: 271d963ea75bae3479ca9557dd9b7ffa, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: a51af3c5ef32e814bb4c757b697814f9, type: 3}
   - quest: {fileID: 21300000, guid: 70433876faef4bf42b015e362da18500, type: 3}
     hint: {fileID: 21300000, guid: b552b9fa54ad0224aa3ebb1d84b5f8d6, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: df6cd75abfbea0c428f1cd54851da58d, type: 3}
   - quest: {fileID: 21300000, guid: c2d7641d380876e4a8a9b7eefd7eb857, type: 3}
     hint: {fileID: 21300000, guid: 59ea709790fd9d74a9fa51f4cf241784, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: adbd9220c0a7a164a90680e1037922f3, type: 3}
   - quest: {fileID: 21300000, guid: 87281b82c26106b4f9f0626cdb3d30dd, type: 3}
     hint: {fileID: 21300000, guid: b4bfa678bc5d79c4a957d3a2e5c00840, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: e55e6a37cfe871d459c00cfdc2084f7f, type: 3}
   - quest: {fileID: 21300000, guid: faa9cfe47e8925b4685f64c4eb8415c5, type: 3}
     hint: {fileID: 21300000, guid: 117be8929f933e24cb5fb310699268bf, type: 3}
     target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
   - quest: {fileID: 21300000, guid: e438fb947fe512e429d63f4c8e063f8c, type: 3}
     hint: {fileID: 21300000, guid: 5233dcafe401bbb47a250f178df27d53, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 72e86c94d7f5b2e4f971bb3d85e5b851, type: 3}
   - quest: {fileID: 21300000, guid: 1c1e5b7d8edb6c6459201b4b598c717a, type: 3}
     hint: {fileID: 21300000, guid: 850c84db76ba0b94bb49ae2350c04220, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 586da82e851df8b4084144f8dff7ade8, type: 3}
   - quest: {fileID: 21300000, guid: ca802f3e38f380a419b48cbd3134e3eb, type: 3}
     hint: {fileID: 21300000, guid: 742c508915788fd429c4c2d2d07687c4, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: a1025f3580f2a5741b47397952990d86, type: 3}
   - quest: {fileID: 21300000, guid: afc5d31426904924da2be1b98f3d2dc5, type: 3}
     hint: {fileID: 21300000, guid: 8bf55596871b9b64c94e1a6fa63065a3, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 73b6c3d2ab02b654d86f0d4f2def0edf, type: 3}
   - quest: {fileID: 21300000, guid: 9b0a58db59b91f84aab2d1973e565172, type: 3}
     hint: {fileID: 21300000, guid: a1f9c58797323b14f9761ec892f1beaf, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 6679887f1a6d57949b2d639bf8ae9fa1, type: 3}
   - quest: {fileID: 21300000, guid: 78ec05e854563a54d8e372ad2bd2ac2e, type: 3}
     hint: {fileID: 21300000, guid: 811d9720da6d1ae47a8e9372e054dea7, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: acfa60225b656ff4fbe56c119906fbe9, type: 3}
   - quest: {fileID: 21300000, guid: 6193c77307a58094cb042d4cca45e579, type: 3}
     hint: {fileID: 21300000, guid: aa5b42a6ab24fe3468d6aa8ffc0cc6b3, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 9b5e25ecee4e08e4eaf6d559c497035a, type: 3}
   - quest: {fileID: 21300000, guid: 28e1c8f28e5e80944944a0632bd1bcac, type: 3}
     hint: {fileID: 21300000, guid: f806263dbb7dbef4485b6663d8bcfbf4, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: f792c25eed21a1a4daabf5853fae8786, type: 3}
   - quest: {fileID: 21300000, guid: e0a429fea6df85e4c89005e29e574a5d, type: 3}
     hint: {fileID: 21300000, guid: 0de8f32cf2fe4fb4dadcd42b62ad8e0e, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 36ac8902782fcf7469be2d1dbbba7fb6, type: 3}
   - quest: {fileID: 21300000, guid: 23ac6c32ac264074fb5bf7a2db996855, type: 3}
     hint: {fileID: 21300000, guid: a21318ff0dab63746977ba18ee54043a, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: dbd80434cbbae244eb0e61c224bd927c, type: 3}
   - quest: {fileID: 21300000, guid: 46da80f29e0f8f7478cc9b8f3c1d8b1c, type: 3}
     hint: {fileID: 21300000, guid: 98c6b1b26524edf439cf10a76e77dfa2, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: ee01ed6517af9424ca7516816f4142cb, type: 3}
   - quest: {fileID: 21300000, guid: ff22e8fe65007ac42a3229de10520f7a, type: 3}
     hint: {fileID: 21300000, guid: 1ac05087c053cbb4383d1452178b0fa2, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: 2cedb4921130355458b1ee817af4cb5b, type: 3}
   - quest: {fileID: 21300000, guid: a31fa365d00723347990b8abb605517b, type: 3}
     hint: {fileID: 21300000, guid: 7be0784c3fa0804479fb2b63af864d23, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: f235c83786a635a4e839380e266d02d5, type: 3}
   - quest: {fileID: 21300000, guid: cae74e43793340844882a30a7dc50b50, type: 3}
     hint: {fileID: 21300000, guid: e909a174a1359d34d96a6986d6d83fa1, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    target: {fileID: 21300000, guid: f907ad445a9412041a0f89b8ebe86ff6, type: 3}
   - quest: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
-    hint: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
-    target: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
+    hint: {fileID: 21300000, guid: c2c59fafd6413d647a30ae4e5ec381ad, type: 3}
+    target: {fileID: 21300000, guid: cc208491fa4a09a4689aa8322bffdcf7, type: 3}
   gameItems:
   - item: {fileID: 1145344301}
     anchoredPos: {x: 500, y: 0}
@@ -10869,11 +10883,13 @@ MonoBehaviour:
   - item: {fileID: 969951595}
     anchoredPos: {x: 0, y: 0}
   canvasGroup: {fileID: 2092112607}
-  backGround: {fileID: 1656607095}
+  stage: {fileID: 1656607095}
   cursorCircle: {fileID: 1570294032}
   questImage: {fileID: 243644836}
   hintImage: {fileID: 799222470}
-  sliderImage: {fileID: 317761930}
+  emptySliderImage: {fileID: 2065893610}
+  fillSliderImage: {fileID: 317761930}
+  logoImage: {fileID: 464019305}
   sliderText: {fileID: 1617094678}
   targetButtons:
   - {fileID: 1145344301}
@@ -10898,7 +10914,6 @@ MonoBehaviour:
   maxTime: 0
   rotationState: 0
   isTouching: 0
-  testSprite: {fileID: 21300000, guid: 7d66f6c76f243406c99583f0b3aa962b, type: 3}
 --- !u!1 &2143300160
 GameObject:
   m_ObjectHideFlags: 0
