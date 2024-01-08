@@ -1325,16 +1325,6 @@ PrefabInstance:
       propertyPath: canvasGroups.Array.data[14]
       value: 
       objectReference: {fileID: 1496730297}
-    - target: {fileID: 1028191191189786769, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
-        type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1081
-      objectReference: {fileID: 0}
-    - target: {fileID: 1028191191189786769, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
-        type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1921
-      objectReference: {fileID: 0}
     - target: {fileID: 3372982260358449257, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1433,16 +1423,6 @@ PrefabInstance:
     - target: {fileID: 3372982260358449257, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3693569524838640869, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 634129968}
-    - target: {fileID: 3693569524838640869, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
-        type: 3}
-      propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3693569524838640869, guid: 265c3839fbe1dd5479392c7a59d8c6ea,
@@ -2816,12 +2796,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601363894}
   m_CullTransparentMesh: 1
---- !u!20 &634129968 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6388031589901729165, guid: 9afd494e363228a4294241ab56ffe7f4,
-    type: 3}
-  m_PrefabInstance: {fileID: 957238067}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &647649927
 GameObject:
   m_ObjectHideFlags: 0
@@ -10906,9 +10880,7 @@ MonoBehaviour:
   curTargetSprites: []
   curTargets: []
   sfx: {fileID: 1722638711}
-  moveSpeed: 4
-  minX: -730
-  maxX: 1230
+  moveSpeed: 1400
   timeRemaining: 0
   maxTime: 0
   rotationState: 0

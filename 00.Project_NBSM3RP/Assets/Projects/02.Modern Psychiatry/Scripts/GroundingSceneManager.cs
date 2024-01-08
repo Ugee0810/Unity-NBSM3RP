@@ -21,7 +21,7 @@ public class GroundingSceneManager : MonoBehaviour
 
     [Space(10), Header("[UGUI]")]
     [ReadOnly(false), SerializeField] private CanvasGroup canvasGroup;
-    [ReadOnly(false), SerializeField] private Transform stage;
+    [ReadOnly(false), SerializeField] private RectTransform stage;
     [ReadOnly(false), SerializeField] private RectTransform cursorCircle;
     [ReadOnly(false), SerializeField] private Image questImage;
     [ReadOnly(false), SerializeField] private Image hintImage;
@@ -42,9 +42,7 @@ public class GroundingSceneManager : MonoBehaviour
     [ReadOnly(false), SerializeField] private AudioSource sfx;
 
     [Space(10), Header("[ETC]")]
-    [SerializeField] private float moveSpeed = 3.0f;
-    [SerializeField] private float minX = -730.0f/* -1550.0f */;
-    [SerializeField] private float maxX = 1230.0f/* 2600.0f */;
+    [SerializeField] private float moveSpeed = 1400.0f;
     [SerializeField] private float timeRemaining;
     [SerializeField] private float maxTime;
     [ReadOnly(false), SerializeField] private float rotationState = 0f;
@@ -58,7 +56,7 @@ public class GroundingSceneManager : MonoBehaviour
             .Where(_ => canvasGroup.alpha == 1)
             .Subscribe(delegate
                 {
-                    TouchMovementRestriction();
+                    MovementRestriction();
                     OnUpdateRotateCursorCircle();
                     ToggleSound();
                     TimerUpdate();
@@ -75,27 +73,35 @@ public class GroundingSceneManager : MonoBehaviour
         GroundModel.OnGameStart += OnGameStart;
     }
 
-    private void TouchMovementRestriction()
+    private void MovementRestriction()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-        float directionX = mousePosition.x - screenCenter.x;
-        Vector3 newPosition = stage.position - new Vector3(directionX, 0, 0) * moveSpeed * Time.deltaTime;
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mousePosition = Input.mousePosition;
+            float screenMidPoint = Screen.width / 2;
 
-        newPosition.x = Mathf.Clamp(
-            value: newPosition.x,
-            min: minX,
-            max: maxX
-        );
+            if (mousePosition.x > screenMidPoint)
+            {
+                stage.anchoredPosition += Vector2.left * moveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                stage.anchoredPosition += Vector2.right * moveSpeed * Time.deltaTime;
+            }
 
-        stage.position = newPosition;
+            Vector2 currentPosition = stage.anchoredPosition;
+
+            float clampedX = Mathf.Clamp(currentPosition.x, -2105, 2100);
+
+            stage.anchoredPosition = new Vector2(clampedX, currentPosition.y);
+        }
     }
 
     private void OnUpdateRotateCursorCircle()
     {
         if (!isTouching)
         {
-            rotationState -= 360f / 4f * Time.deltaTime;
+            rotationState -= 360f / 3f * Time.deltaTime;
 
             Vector2 centerPoint = new(Screen.width / 2, Screen.height / 2);
             float radius = Mathf.Min(Screen.width, Screen.height) / 4;
