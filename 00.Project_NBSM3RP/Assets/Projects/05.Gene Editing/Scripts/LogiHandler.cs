@@ -6,7 +6,7 @@ public class LogiHandler : MonoBehaviour
     private LogitechGSDK.DIJOYSTATE2ENGINES rec;
     [ReadOnly(false)] public int handle;
     [ReadOnly(false)] public int throttle;
-    [ReadOnly(false)] public int _brake;
+    [ReadOnly(false)] public int brake;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class LogiHandler : MonoBehaviour
 
             handle = rec.lX;
             throttle = rec.lY;
-            _brake = rec.lRz;
+            brake = rec.lRz;
         }
     }
 }
